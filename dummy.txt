@@ -1,0 +1,1 @@
+to run file enter "npm run dev " cmd in terminal

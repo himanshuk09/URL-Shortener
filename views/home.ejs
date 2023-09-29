@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Raleway", sans-serif;
+        }
+
+        .header {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: #111;
+            color: #eee;
+            font-weight: 600;
+        }
+
+        .form {
+            padding: 50px 20px;
+            background: #d2e9f7;
+        }
+
+        .form>div {
+            width: 400px;
+            margin: 10px auto;
+        }
+
+        .form .form-element input,
+        .form .form-element button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .form .form-element button {
+            background: #111;
+            color: #eee;
+            outline: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .form .result {
+            text-align: center;
+            border-top: 1px solid #eee;
+            margin-top: 5px;
+        }
+
+        .list {
+            width: 800px;
+            margin: 40px auto;
+        }
+
+        .list h2 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .list table {
+            width: 100%;
+            text-align: center;
+        }
+
+        .list table thead tr {
+            background: #555;
+            color: #eee;
+        }
+
+        .list table thead tr th,
+        .list table tbody tr td {
+            padding: 5px;
+        }
+
+        .list table tbody tr:nth-child(odd) {
+            background: #eee;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <div class="header">
+        Create Short URL
+    </div>
+            <div class="main">
+
+                <form class="form" method="post" action="/url">
+                    <div class="form-element">
+                        <label for="url">Enter Your Original URL</label>
+                        <input type="text" name="url" id="" placeholder="https://www.example.com" />
+                    </div>
+                    <div class="form-element">
+                        <button type="submit" id="create-short-url">Create Short URL</button>
+                    </div>
+                    <div class="result">
+                        <a href="#" id="short-url" target="_blank">
+                            <% if (locals.id) { %>
+                                <p>URl Generated :http://localhost:8001/url/<%= id %>
+                                </p>
+                                
+                                <%  } %>
+                        </a>
+                    </div>
+                </form>
+                <div>
+                    <div class="list">
+                        <h2>Shorten links</h2>
+                        <table id="list_urls">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No</th>
+                                    <th>LongURL</th>
+                                    <th>ShortURL</th>
+                                    <th>Count</th>
+                                </tr>
+                            </thead>
+                            <% if (locals.urls) { %>
+                                <tbody>
+                                    <% urls.forEach((url,index)=> { %>
+                                        <tr>
+                                            <td>
+                                                <%= index +1 %>
+                                            </td>
+                                            <td>
+                                                <%= url.redirectURL%>
+                                            </td>
+                                            <td>
+                                                <%= url.shortId %>
+                                            </td>
+                                            <td>
+                                                <%= url.visitHistory.length %>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                        </table>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+</body>
+
+</html>
